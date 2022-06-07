@@ -1,0 +1,23 @@
+<div class="col-md-4 mx-auto">
+
+    <div class="card">
+        <div class="card-body">
+            <form action="/links/edit/{{link.id}}" method="POST">
+                <div class="form-group">
+                    <input type="text" name="title" class="form-control" placeholder="Nombre" value="{{user.name}}" autofocus>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" value="{{user.username}}">
+                </div>
+                <div class="form-group">
+                    <input name="password"  class="form-control" placeholder="Contraseña" value="{{link.description}}">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success btn-block">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
