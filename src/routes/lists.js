@@ -4,11 +4,11 @@ const router = express.Router();
 const pool = require('../database');
 const { isLoggedIn } = require('../lib/auth');
 
-router.get('/add', (req, res) => {
+router.get('/add', isLoggedIn, (req, res) => {
     res.render('lists/add');
 });
 
-router.post('/add', async (req, res) => {
+router.post('/add', isLoggedIn, async (req, res) => {
     const { list_name, list_description } = req.body;
     const newList = {
         user_id: req.user.id,
@@ -25,21 +25,21 @@ router.get('/', isLoggedIn, async (req, res) => {
     res.render('lists/list', { lists });
 });
 
-router.get('/delete/:id', async (req, res) => {
+router.get('/delete/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     await pool.query('DELETE FROM lists WHERE list_id = ?', [id]);
     req.flash('success', 'Lists Removed Successfully');
     res.redirect('/lists');
 });
 
-router.get('/edit/:id', async (req, res) => {
+router.get('/edit/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     const lists = await pool.query('SELECT * FROM lists WHERE list_id = ?', [id]);
     console.log(lists);
     res.render('lists/edit', {list: lists[0]});
 });
 
-router.post('/edit/:id', async (req, res) => {
+router.post('/edit/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     const { list_name, list_description} = req.body; 
     const newLink = {
@@ -51,7 +51,7 @@ router.post('/edit/:id', async (req, res) => {
     res.redirect('/lists');
 });
 
-router.get('/books/:id', (req, res) => {
+router.get('/books/:id', isLoggedIn, (req, res) => {
     res.render('lists/books');
 });
 

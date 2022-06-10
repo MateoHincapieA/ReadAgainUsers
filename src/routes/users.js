@@ -15,14 +15,14 @@ router.get('/chat/:id', isLoggedIn, async (req, res) => {
     res.render('users/active', { user: user[0]});
 });
 
-router.get('/edit/:id', async (req, res) => {
+router.get('/edit/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     const user = await pool.query('SELECT * FROM users WHERE id = ?', [id]);
     console.log(user);
     res.render('users/edit', {user: user[0]});
 });
 
-router.post('/edit/:id', async (req, res) => {
+router.post('/edit/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     const { name, email, username, password } = req.body; 
     const newUser = {
