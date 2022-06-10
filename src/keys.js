@@ -4,8 +4,8 @@ module.exports = {
         connectionLimit: 10,
         host: 'localhost',
         user: 'root',
-        password: '',
-        database: ''
+        password: '2411',
+        database: 'ReadAgain'
     }
 
 };
