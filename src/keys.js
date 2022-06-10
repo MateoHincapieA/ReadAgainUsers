@@ -5,7 +5,7 @@ module.exports = {
         host: 'localhost',
         user: 'root',
         password: '2411',
-        database: 'users'
+        database: 'ReadAgain'
     }
 
 };

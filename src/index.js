@@ -8,20 +8,11 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const MySQLStore = require('express-mysql-session')(session);
 const bodyParser = require('body-parser');
-const cors = require('cors');
-
-const port = process.env.PORT || 3000;
-
 const { database } = require('./keys');
 
 // Intializations
 const app = express();
 require('./lib/passport');
-const corsOptions = {
-    origin: '*',
-    optionSuccessStatus: 200
-}
-app.use(cors(corsOptions));
 
 // Settings
 app.set('port', process.env.PORT || 4000);
@@ -41,7 +32,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(session({
-  secret: 'ReadAgainUsers',
+  secret: 'faztmysqlnodemysql',
   resave: false,
   saveUninitialized: false,
   store: new MySQLStore(database)
@@ -62,7 +53,7 @@ app.use((req, res, next) => {
 // Routes
 app.use(require('./routes/index'));
 app.use(require('./routes/authentication'));
-app.use('/users', require('./routes/users'));
+app.use('/lists', require('./routes/lists'));
 
 // Public
 app.use(express.static(path.join(__dirname, 'public')));
@@ -71,3 +62,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () => {
   console.log('Server is in port', app.get('port'));
 });
+
+module.exports = app;
