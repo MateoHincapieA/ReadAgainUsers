@@ -12,7 +12,7 @@ app.get('api/libros', (req, res) => res.json({
 }))
 
 // Routes
-app.use(require('./routes/index'));
+app.use(require('./routes/libros'));
 
 const host = '0.0.0.0';
 const port = process.env.PORT || 3000;
