@@ -51,4 +51,8 @@ router.post('/edit/:id', async (req, res) => {
     res.redirect('/lists');
 });
 
+router.get('/books/:id', (req, res) => {
+    res.render('lists/books');
+});
+
 module.exports = router;
